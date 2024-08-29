@@ -1,9 +1,12 @@
-import css from './Contact.module.css';
 import { IoIosContact } from 'react-icons/io';
 import { FaPhone } from 'react-icons/fa6';
 import { IconContext } from 'react-icons';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
+import css from './Contact.module.css';
 
-const Contact = ({ id, name, number, onDelete }) => {
+const Contact = ({ id, name, number }) => {
+  const dispatch = useDispatch();
   return (
     <li className={css.contact}>
       <span className={css.info}>
@@ -26,7 +29,11 @@ const Contact = ({ id, name, number, onDelete }) => {
           </a>
         </span>
       </span>
-      <button type="button" className={css.btn} onClick={() => onDelete(id)}>
+      <button
+        type="button"
+        className={css.btn}
+        onClick={() => dispatch(deleteContact(id))}
+      >
         Delete
       </button>
     </li>
